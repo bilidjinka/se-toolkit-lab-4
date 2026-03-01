@@ -1,3 +1,4 @@
+// App.tsx
 import { useState, useEffect, FormEvent } from 'react'
 import './App.css'
 
@@ -7,6 +8,7 @@ interface Item {
   id: number
   type: string
   title: string
+  description: string  // Added description field
   created_at: string
 }
 
@@ -26,10 +28,10 @@ function App() {
     setError(null)
 
     fetch('/items', {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: Bearer ${token} },
     })
       .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        if (!res.ok) throw new Error(HTTP ${res.status})
         return res.json()
       })
       .then((data: Item[]) => {
@@ -61,7 +63,7 @@ function App() {
   if (!token) {
     return (
       <form className="token-form" onSubmit={handleConnect}>
-        <h1>API Token</h1>
+        <h1>AP</h1>
         <p>Enter your API token to connect.</p>
         <input
           type="password"
@@ -93,6 +95,7 @@ function App() {
               <th>ID</th>
               <th>Type</th>
               <th>Title</th>
+              <th>Description</th>  {/* Added Description column header */}
               <th>Created at</th>
             </tr>
           </thead>
@@ -102,6 +105,7 @@ function App() {
                 <td>{item.id}</td>
                 <td>{item.type}</td>
                 <td>{item.title}</td>
+                <td>{item.description}</td>  {/* Added description value */}
                 <td>{item.created_at}</td>
               </tr>
             ))}
